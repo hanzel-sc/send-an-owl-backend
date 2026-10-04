@@ -26,17 +26,27 @@ class App < Sinatra::Base
   configure do
     FileUtils.mkdir_p(TMP_DIR)
 
+    cors_env = ENV.fetch('CORS_ORIGIN', '*')
+    cors_origins = cors_env.include?(',') ? cors_env.split(',').map(&:strip) : cors_env
+
     use Rack::Cors do
       allow do
-        origins(ENV.fetch('CORS_ORIGIN', '*'))
-        resource '/generate', methods: [:post, :options], headers: :any
-        resource '/', methods: [:get], headers: :any
+        origins(cors_origins)
+        resource '*', methods: [:get, :post, :options], headers: :any
       end
     end
   end
 
-  # Health check
+  # Health check probes (used by Render health check and client readiness monitors)
   get '/' do
+    json({
+      status: 'ok',
+      service: 'send-an-owl',
+      message: 'Owl post is ready and listening!'
+    })
+  end
+
+  get '/health' do
     json({
       status: 'ok',
       service: 'send-an-owl',

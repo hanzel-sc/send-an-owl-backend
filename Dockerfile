@@ -55,8 +55,9 @@ RUN mkdir -p tmp
 
 # Grover configuration for headless Chromium
 ENV GROVER_NO_SANDBOX=true
+ENV PORT=10000
 
 EXPOSE 10000
 
-CMD ["bundle", "exec", "puma", "config.ru", "-p", "10000", "-e", "production"]
+CMD ["sh", "-c", "bundle exec puma config.ru -b tcp://0.0.0.0:${PORT:-10000} -e production"]
 
