@@ -1,0 +1,7 @@
+.env
+tmp/*
+!tmp/.keep
+*.log
+.DS_Store
+vendor/
+.bundle/

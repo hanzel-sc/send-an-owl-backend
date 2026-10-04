@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Inter:wght@400;500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: 600px 800px;
+      margin: 0;
+    }
+
+    body {
+      width: 600px;
+      height: 800px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    <%= css %>
+  </style>
+</head>
+<body>
+  <div class="classic-card" style="background-image: url('<%= bg_data_uri %>'); width: 600px; height: 800px;">
+    <div class="classic-card__photo-frame">
+      <img src="<%= photo_data_uri %>" alt="Photo" />
+    </div>
+
+    <div class="classic-card__greeting">Happy Birthday</div>
+    <div class="classic-card__name"><%= recipient_name %></div>
+    <div class="classic-card__message"><%= message %></div>
+    <div class="classic-card__sender">— <%= sender_name %></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: send-an-owl-api
+    ports:
+      - "10000:10000"
+    env_file:
+      - .env
+    environment:
+      - PORT=10000
+    volumes:
+      - ./tmp:/app/tmp
+    restart: unless-stopped
